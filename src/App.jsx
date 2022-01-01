@@ -1,3 +1,5 @@
+import VideoPlayer from './components/VideoPlayer';
+
 export default function App() {
-  return <div>Hello</div>;
+  return <VideoPlayer />;
 }
