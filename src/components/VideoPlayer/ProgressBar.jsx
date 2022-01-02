@@ -1,46 +1,43 @@
 import {
   ProgressDiv,
   BarContainer,
+  BarInput,
   WatchedBar,
-  PlayHead,
   VideoDuration,
 } from './style';
 import { useRef } from 'react';
 
 export default function ProgressBar({
   barWidth,
+  setBarWidth,
   videoRef,
   durationMinutes,
   durationSeconds,
 }) {
   const barRef = useRef();
 
-  const handleClickTime = (e) => {
-    const clickTime =
-      (e.nativeEvent.offsetX / barRef.current.offsetWidth) *
-      videoRef.current.duration;
-    videoRef.current.currentTime = clickTime;
+  const handleSlideBar = (e) => {
+    setBarWidth(e.target.value);
+    videoRef.current.currentTime =
+      videoRef.current.duration * (e.target.value / 1000);
   };
 
-  const handleSlideTime = (e) => {
-    videoRef.current.currentTime = e.target.value;
-  };
+  console.log(barWidth / 10);
 
   return (
     <ProgressDiv>
-      <BarContainer
-        ref={barRef}
-        onClick={(e) => handleClickTime(e)}
-        value={barWidth}
-        type="range"
-        min="0"
-        max="1000"
-        step="1"
-        onChange={(e) => handleSlideTime(e)}
-      >
-        {/* <WatchedBar barWidth={barWidth} /> */}
-        {/* <PlayHead /> */}
+      <BarContainer onChange={(e) => handleSlideBar(e)}>
+        <BarInput
+          ref={barRef}
+          value={barWidth}
+          type="range"
+          min="0"
+          max="1000"
+          step="0.01"
+        />
+        <WatchedBar barWidth={barWidth} />
       </BarContainer>
+
       <VideoDuration>
         {durationMinutes}:
         {durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}

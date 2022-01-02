@@ -30,45 +30,58 @@ export const ProgressDiv = styled.div`
   align-items: center;
 `;
 
-export const PlayHead = styled.div`
-  background: orangered;
-  height: 0px;
-  width: 0px;
-  border-radius: 50%;
-  transform: translateX(-5%);
+export const BarInput = styled.input`
+  -webkit-appearance: none;
+  width: 100%;
+  outline: none;
+  border-radius: 3px;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+  ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    transform: translateX(-3%);
+    background: orangered;
+    outline: 0;
+    border-radius: 50%;
+    position: relative;
+    visibility: hidden;
+  }
 `;
 
-export const BarContainer = styled.input`
-  display: flex;
-  align-items: center;
+export const BarContainer = styled.div`
   width: 100%;
-  height: 5px;
+  height: 7px;
+  flex-grow: 1;
+  transform: scaleY(0.6);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  position: relative;
+  cursor: pointer;
+  :hover {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  :hover ::-webkit-slider-thumb {
+    visibility: visible;
+  }
+`;
+
+export const WatchedBar = styled.div`
+  background: orangered;
+  height: 100%;
+  border-radius: 3px;
+  position: absolute;
   top: 0;
   left: 0;
-  flex-grow: 1;
-  background: rgba(255, 255, 255, 0.2);
-  transform: scaleY(0.6);
-  :hover {
-    cursor: pointer;
-    transform: scaleY(1);
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  :hover ${PlayHead} {
-    height: 20px;
-    width: 20px;
-  }
+  width: ${(props) => props.barWidth / 10}%;
 `;
 
 export const VideoDuration = styled.div`
   color: white;
   padding: 10px;
-`;
-
-export const WatchedBar = styled.div`
-  height: 100%;
-  background: orangered;
-  width: ${(props) => props.barWidth}%;
 `;
 
 export const ButtonContainer = styled.div`

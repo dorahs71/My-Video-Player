@@ -6,6 +6,7 @@ import Volume from './Volume';
 export default function Controls({
   videoRef,
   barWidth,
+  setBarWidth,
   togglePlay,
   isPlay,
   durationMinutes,
@@ -15,11 +16,12 @@ export default function Controls({
     <ControlContainer>
       <ProgressBar
         barWidth={barWidth}
+        setBarWidth={setBarWidth}
         videoRef={videoRef}
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
       />
-      <PlayPause togglePlay={togglePlay} isPlay={isPlay} />
+      <PlayPause togglePlay={togglePlay} isPlay={isPlay} barWidth={barWidth} />
       <Volume videoRef={videoRef} />
     </ControlContainer>
   );

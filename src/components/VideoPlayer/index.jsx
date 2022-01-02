@@ -28,13 +28,14 @@ export default function VideoPlayer() {
 
   const handleBarWidth = () => {
     if (videoRef.current !== null) {
-      let nowMoment =
-        (videoRef.current.currentTime / videoRef.current.duration) * 100;
+      let nowMoment = Math.floor(
+        (videoRef.current.currentTime / videoRef.current.duration) * 1000
+      );
       setBarWidth(nowMoment);
     }
   };
 
-  const handleVideoDuration = () => {
+  const handleShowDuration = () => {
     if (videoRef.current !== null) {
       let minutes = Math.floor(
         (videoRef.current.duration - videoRef.current.currentTime) / 60
@@ -47,9 +48,16 @@ export default function VideoPlayer() {
     }
   };
 
+  const handleVideoEndChangeToPlay = () => {
+    if (videoRef.current.ended) {
+      setIsPlay(true);
+    }
+  };
+
   const handleVideoProgress = () => {
     handleBarWidth();
-    handleVideoDuration();
+    handleShowDuration();
+    handleVideoEndChangeToPlay();
   };
 
   return (
@@ -65,6 +73,7 @@ export default function VideoPlayer() {
       <Controls
         videoRef={videoRef}
         barWidth={barWidth}
+        setBarWidth={setBarWidth}
         togglePlay={togglePlay}
         isPlay={isPlay}
         durationMinutes={durationMinutes}
