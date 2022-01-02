@@ -5,8 +5,10 @@ import Controls from './Controls';
 
 export default function VideoPlayer() {
   const videoRef = useRef(null);
-  const [barWidth, setbarWidth] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
+  const [barWidth, setBarWidth] = useState(0);
+  const [durationMinutes, setDurationMinutes] = useState(2);
+  const [durationSeconds, setDurationSeconds] = useState(51);
 
   useEffect(() => {
     if (videoRef !== null && videoRef.current.paused) {
@@ -28,8 +30,26 @@ export default function VideoPlayer() {
     if (videoRef.current !== null) {
       let nowMoment =
         (videoRef.current.currentTime / videoRef.current.duration) * 100;
-      setbarWidth(nowMoment);
+      setBarWidth(nowMoment);
     }
+  };
+
+  const handleVideoDuration = () => {
+    if (videoRef.current !== null) {
+      let minutes = Math.floor(
+        (videoRef.current.duration - videoRef.current.currentTime) / 60
+      );
+      let seconds = Math.floor(
+        videoRef.current.duration - videoRef.current.currentTime - minutes * 60
+      );
+      setDurationMinutes(minutes);
+      setDurationSeconds(seconds);
+    }
+  };
+
+  const handleVideoProgress = () => {
+    handleBarWidth();
+    handleVideoDuration();
   };
 
   return (
@@ -37,12 +57,19 @@ export default function VideoPlayer() {
       <Video
         preload="metadata"
         ref={videoRef}
-        onTimeUpdate={handleBarWidth}
+        onTimeUpdate={handleVideoProgress}
         onClick={togglePlay}
       >
         <source src={video1_480p} type="video/mp4" />
       </Video>
-      <Controls barWidth={barWidth} togglePlay={togglePlay} isPlay={isPlay} />
+      <Controls
+        videoRef={videoRef}
+        barWidth={barWidth}
+        togglePlay={togglePlay}
+        isPlay={isPlay}
+        durationMinutes={durationMinutes}
+        durationSeconds={durationSeconds}
+      />
     </VideoContainer>
   );
 }

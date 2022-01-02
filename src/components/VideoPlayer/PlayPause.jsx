@@ -1,6 +1,6 @@
 import { ButtonContainer, ButtonDiv, Pause, Play } from './style';
 
-export default function Buttons({ togglePlay, isPlay }) {
+export default function PlayPause({ togglePlay, isPlay }) {
   return (
     <ButtonContainer>
       <ButtonDiv onClick={togglePlay}>
