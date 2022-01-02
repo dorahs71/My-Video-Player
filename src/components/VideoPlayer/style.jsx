@@ -3,6 +3,8 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 
+import { MdOutlineForward10, MdReplay10 } from 'react-icons/md';
+
 export const VideoContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -130,5 +132,13 @@ export const UnMute = styled(HiVolumeUp)`
 `;
 
 export const Mute = styled(HiVolumeOff)`
+  transform: scale(1.8);
+`;
+
+export const Forward = styled(MdOutlineForward10)`
+  transform: scale(1.8);
+`;
+
+export const Backward = styled(MdReplay10)`
   transform: scale(1.8);
 `;

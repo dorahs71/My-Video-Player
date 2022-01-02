@@ -8,7 +8,7 @@ export default function VideoPlayer() {
   const [isPlay, setIsPlay] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState(2);
-  const [durationSeconds, setDurationSeconds] = useState(51);
+  const [durationSeconds, setDurationSeconds] = useState(30);
 
   useEffect(() => {
     if (videoRef !== null && videoRef.current.paused) {

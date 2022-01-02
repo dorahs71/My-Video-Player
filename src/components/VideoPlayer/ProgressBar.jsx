@@ -22,11 +22,9 @@ export default function ProgressBar({
       videoRef.current.duration * (e.target.value / 1000);
   };
 
-  console.log(barWidth / 10);
-
   return (
     <ProgressDiv>
-      <BarContainer onChange={(e) => handleSlideBar(e)}>
+      <BarContainer>
         <BarInput
           ref={barRef}
           value={barWidth}
@@ -34,6 +32,7 @@ export default function ProgressBar({
           min="0"
           max="1000"
           step="0.01"
+          onChange={(e) => handleSlideBar(e)}
         />
         <WatchedBar barWidth={barWidth} />
       </BarContainer>

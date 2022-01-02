@@ -2,6 +2,7 @@ import { ControlContainer } from './style';
 import ProgressBar from './ProgressBar';
 import PlayPause from './PlayPause';
 import Volume from './Volume';
+import ForwardBackward from './ForwardBackward';
 
 export default function Controls({
   videoRef,
@@ -22,6 +23,7 @@ export default function Controls({
         durationSeconds={durationSeconds}
       />
       <PlayPause togglePlay={togglePlay} isPlay={isPlay} barWidth={barWidth} />
+      <ForwardBackward setBarWidth={setBarWidth} videoRef={videoRef} />
       <Volume videoRef={videoRef} />
     </ControlContainer>
   );
