@@ -1,4 +1,4 @@
-import { ControlContainer } from './style';
+import { ControlContainer, TrailerName } from './style';
 import ProgressBar from './ProgressBar';
 import LeftButtons from './LeftButtons';
 import RightButtons from './RightButtons';
@@ -12,6 +12,7 @@ export default function Controls({
   durationMinutes,
   durationSeconds,
   videoContainerRef,
+  trailerName,
 }) {
   return (
     <ControlContainer>
@@ -29,6 +30,7 @@ export default function Controls({
         setBarWidth={setBarWidth}
         videoRef={videoRef}
       />
+      <TrailerName>{trailerName}</TrailerName>
       <RightButtons videoRef={videoRef} videoContainerRef={videoContainerRef} />
     </ControlContainer>
   );

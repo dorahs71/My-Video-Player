@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { FaPlay, FaPause } from 'react-icons/fa';
+import { FaPlay, FaPause, FaClone, FaStepForward } from 'react-icons/fa';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 import { MdOutlineForward10, MdReplay10, MdSpeed } from 'react-icons/md';
 import { RiFullscreenFill, RiFullscreenExitFill } from 'react-icons/ri';
+import { BsBookmarkStarFill } from 'react-icons/bs';
 
 export const VideoContainer = styled.div`
   width: 100%;
@@ -113,6 +114,10 @@ export const ButtonDiv = styled.div`
   transition: all 0.3s;
 `;
 
+export const TrailerName = styled.div`
+  padding: 10px;
+`;
+
 export const Play = styled(FaPlay)`
   transform: scale(1.5);
 `;
@@ -159,7 +164,7 @@ export const ExitFull = styled(RiFullscreenExitFill)`
   transform: scale(1.7);
 `;
 
-export const SpeedBtn = styled(MdSpeed)`
+export const SpeedIcon = styled(MdSpeed)`
   transform: scale(2);
 `;
 
@@ -187,4 +192,16 @@ export const SpeedNum = styled.div`
   margin-left: 10px;
   font-weight: bold;
   width: 50px;
+`;
+
+export const EpisodeIcon = styled(FaClone)`
+  transform: rotate(180deg) scale(1.5);
+`;
+
+export const NextIcon = styled(FaStepForward)`
+  transform: scale(1.6);
+`;
+
+export const BookmarkIcon = styled(BsBookmarkStarFill)`
+  transform: scale(1.5);
 `;

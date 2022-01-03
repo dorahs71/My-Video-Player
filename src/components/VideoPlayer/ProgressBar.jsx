@@ -38,7 +38,7 @@ export default function ProgressBar({
       </BarContainer>
 
       <VideoDuration>
-        {durationMinutes}:
+        {'0' + durationMinutes}:
         {durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}
       </VideoDuration>
     </ProgressDiv>

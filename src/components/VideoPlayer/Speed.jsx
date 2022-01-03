@@ -1,7 +1,7 @@
 import {
   ButtonContainer,
   ButtonDiv,
-  SpeedBtn,
+  SpeedIcon,
   SpeedBoard,
   SpeedBar,
   SpeedNum,
@@ -29,7 +29,7 @@ export default function Speed({ videoRef }) {
     <>
       <ButtonContainer>
         <ButtonDiv onClick={toggleSpeedBoard}>
-          <SpeedBtn />
+          <SpeedIcon />
         </ButtonDiv>
       </ButtonContainer>
       {trigger && (

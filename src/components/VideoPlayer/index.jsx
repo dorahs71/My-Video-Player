@@ -11,8 +11,8 @@ export default function VideoPlayer() {
   const [isPlay, setIsPlay] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
   const [videoSrc, setVideoSrc] = useState(0);
-  const [durationMinutes, setDurationMinutes] = useState(2);
-  const [durationSeconds, setDurationSeconds] = useState(30);
+  const [durationMinutes, setDurationMinutes] = useState('0');
+  const [durationSeconds, setDurationSeconds] = useState('0');
 
   useEffect(() => {
     if (videoRef !== null && !videoRef.current.paused) {
@@ -78,7 +78,7 @@ export default function VideoPlayer() {
   return (
     <VideoContainer ref={videoContainerRef}>
       <Video
-        src={videoSrc.lowQuality}
+        src={videoSrc.trailer}
         type="video/mp4"
         preload="metadata"
         ref={videoRef}
@@ -95,6 +95,7 @@ export default function VideoPlayer() {
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
         videoContainerRef={videoContainerRef}
+        trailerName={videoSrc.chTitle}
       />
     </VideoContainer>
   );

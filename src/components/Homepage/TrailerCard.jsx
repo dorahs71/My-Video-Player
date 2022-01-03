@@ -17,9 +17,15 @@ export default function TrailerCard({ data }) {
       <CardLink to={`/trailer/${data.id}`} key={data.id}>
         <CardContainer>
           <VideoBox>
-            <Video autoPlay muted loop>
-              <source src={data.lowQuality} type="video/mp4" />
-            </Video>
+            <Video
+              src={data.trailer}
+              type="video/mp4"
+              autoPlay
+              muted
+              loop
+              preload="metadata"
+            />
+
             <Poster src={data.poster} alt="matrix trailer" />
           </VideoBox>
           <ContentDiv>
