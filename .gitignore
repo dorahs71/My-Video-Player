@@ -6,8 +6,6 @@
 .pnp.js
 /.firebase
 
-# file
-/src/video
 
 # testing
 /coverage

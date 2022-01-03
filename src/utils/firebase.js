@@ -13,3 +13,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
+
+export const getTrailerCardData = () => {
+  return firestore.collection('Trailers').get();
+};
+
+export const getVideoSource = (trailer) => {
+  return firestore.collection('Trailers').doc(trailer).get();
+};

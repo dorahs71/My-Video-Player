@@ -1,21 +1,35 @@
 import { VideoContainer, Video } from './style';
 import { useRef, useState, useEffect } from 'react';
-import video1_480p from '../../video/matrix1_480p.mp4';
+import { useParams } from 'react-router-dom';
+import { getVideoSource } from '../../utils/firebase';
 import Controls from './Controls';
 
 export default function VideoPlayer() {
+  const { id } = useParams();
   const videoRef = useRef(null);
   const videoContainerRef = useRef(null);
   const [isPlay, setIsPlay] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
+  const [videoSrc, setVideoSrc] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState(2);
   const [durationSeconds, setDurationSeconds] = useState(30);
 
   useEffect(() => {
-    if (videoRef !== null && videoRef.current.paused) {
-      setIsPlay(true);
+    if (videoRef !== null && !videoRef.current.paused) {
+      setIsPlay(false);
     }
   }, [isPlay]);
+
+  useEffect(() => {
+    let isMounted = true;
+    getVideoSource(id).then((doc) => {
+      const data = doc.data();
+      if (isMounted) setVideoSrc(data);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const togglePlay = () => {
     if (isPlay) {
@@ -64,13 +78,14 @@ export default function VideoPlayer() {
   return (
     <VideoContainer ref={videoContainerRef}>
       <Video
+        src={videoSrc.lowQuality}
+        type="video/mp4"
         preload="metadata"
         ref={videoRef}
         onTimeUpdate={handleVideoProgress}
         onClick={togglePlay}
-      >
-        <source src={video1_480p} type="video/mp4" />
-      </Video>
+        autoPlay
+      />
       <Controls
         videoRef={videoRef}
         barWidth={barWidth}
