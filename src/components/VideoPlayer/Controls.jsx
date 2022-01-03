@@ -29,7 +29,7 @@ export default function Controls({
         setBarWidth={setBarWidth}
         videoRef={videoRef}
       />
-      <RightButtons videoContainerRef={videoContainerRef} />
+      <RightButtons videoRef={videoRef} videoContainerRef={videoContainerRef} />
     </ControlContainer>
   );
 }

@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 import { FaPlay, FaPause } from 'react-icons/fa';
-
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
-
-import { MdOutlineForward10, MdReplay10 } from 'react-icons/md';
-
+import { MdOutlineForward10, MdReplay10, MdSpeed } from 'react-icons/md';
 import { RiFullscreenFill, RiFullscreenExitFill } from 'react-icons/ri';
 
 export const VideoContainer = styled.div`
@@ -29,7 +26,7 @@ export const ControlContainer = styled.div`
   flex-wrap: wrap;
   background: transparent;
   color: #fff;
-  padding: 30px 0px 20px 0px;
+  padding-bottom: 10px;
 `;
 
 export const ButtonArea = styled.div`
@@ -39,6 +36,7 @@ export const ButtonArea = styled.div`
 export const ProgressDiv = styled.div`
   display: flex;
   width: 100%;
+  height: 12px;
   align-items: center;
 `;
 
@@ -146,17 +144,47 @@ export const Mute = styled(HiVolumeOff)`
 `;
 
 export const Forward = styled(MdOutlineForward10)`
-  transform: scale(1.8);
+  transform: scale(2);
 `;
 
 export const Backward = styled(MdReplay10)`
-  transform: scale(1.8);
+  transform: scale(2);
 `;
 
 export const Full = styled(RiFullscreenFill)`
-  transform: scale(1.8);
+  transform: scale(1.7);
 `;
 
 export const ExitFull = styled(RiFullscreenExitFill)`
-  transform: scale(1.8);
+  transform: scale(1.7);
+`;
+
+export const SpeedBtn = styled(MdSpeed)`
+  transform: scale(2);
+`;
+
+export const SpeedBoard = styled.div`
+  position: absolute;
+  z-index: 3;
+  padding: 20px;
+  color: #fff;
+  background: rgba(45, 45, 45, 0.7);
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  bottom: 75px;
+  right: 0;
+`;
+
+export const SpeedBar = styled.input`
+  display: block;
+  cursor: pointer;
+`;
+
+export const SpeedNum = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  font-weight: bold;
+  width: 50px;
 `;
