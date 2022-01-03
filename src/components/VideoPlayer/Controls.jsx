@@ -1,8 +1,7 @@
 import { ControlContainer } from './style';
 import ProgressBar from './ProgressBar';
-import PlayPause from './PlayPause';
-import Volume from './Volume';
-import ForwardBackward from './ForwardBackward';
+import LeftButtons from './LeftButtons';
+import RightButtons from './RightButtons';
 
 export default function Controls({
   videoRef,
@@ -12,6 +11,7 @@ export default function Controls({
   isPlay,
   durationMinutes,
   durationSeconds,
+  videoContainerRef,
 }) {
   return (
     <ControlContainer>
@@ -22,9 +22,14 @@ export default function Controls({
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
       />
-      <PlayPause togglePlay={togglePlay} isPlay={isPlay} barWidth={barWidth} />
-      <ForwardBackward setBarWidth={setBarWidth} videoRef={videoRef} />
-      <Volume videoRef={videoRef} />
+      <LeftButtons
+        togglePlay={togglePlay}
+        isPlay={isPlay}
+        barWidth={barWidth}
+        setBarWidth={setBarWidth}
+        videoRef={videoRef}
+      />
+      <RightButtons videoContainerRef={videoContainerRef} />
     </ControlContainer>
   );
 }

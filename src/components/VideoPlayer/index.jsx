@@ -5,6 +5,7 @@ import Controls from './Controls';
 
 export default function VideoPlayer() {
   const videoRef = useRef(null);
+  const videoContainerRef = useRef(null);
   const [isPlay, setIsPlay] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState(2);
@@ -61,7 +62,7 @@ export default function VideoPlayer() {
   };
 
   return (
-    <VideoContainer>
+    <VideoContainer ref={videoContainerRef}>
       <Video
         preload="metadata"
         ref={videoRef}
@@ -78,6 +79,7 @@ export default function VideoPlayer() {
         isPlay={isPlay}
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
+        videoContainerRef={videoContainerRef}
       />
     </VideoContainer>
   );

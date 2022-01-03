@@ -5,6 +5,8 @@ import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 
 import { MdOutlineForward10, MdReplay10 } from 'react-icons/md';
 
+import { RiFullscreenFill, RiFullscreenExitFill } from 'react-icons/ri';
+
 export const VideoContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -13,10 +15,14 @@ export const VideoContainer = styled.div`
 
 export const Video = styled.video`
   width: 100%;
+  ::-webkit-media-controls {
+    display: none !important;
+  }
 `;
 
 export const ControlContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -24,6 +30,10 @@ export const ControlContainer = styled.div`
   background: transparent;
   color: #fff;
   padding: 30px 0px 20px 0px;
+`;
+
+export const ButtonArea = styled.div`
+  display: flex;
 `;
 
 export const ProgressDiv = styled.div`
@@ -140,5 +150,13 @@ export const Forward = styled(MdOutlineForward10)`
 `;
 
 export const Backward = styled(MdReplay10)`
+  transform: scale(1.8);
+`;
+
+export const Full = styled(RiFullscreenFill)`
+  transform: scale(1.8);
+`;
+
+export const ExitFull = styled(RiFullscreenExitFill)`
   transform: scale(1.8);
 `;
