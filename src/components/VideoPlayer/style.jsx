@@ -27,7 +27,7 @@ export const ControlContainer = styled.div`
   flex-wrap: wrap;
   background: transparent;
   color: #fff;
-  padding-bottom: 10px;
+  padding: 0px 10px 10px 10px;
 `;
 
 export const ButtonArea = styled.div`
@@ -127,16 +127,19 @@ export const Pause = styled(FaPause)`
 `;
 
 export const VolumeBar = styled.input`
-  max-width: 0;
+  width: 100%;
+  opacity: 0;
+  margin-bottom: 7px;
+  margin-left: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: max-width 0.5s;
+  transition: opacity 0.5s;
 `;
 
 export const VolumeContainer = styled.div`
   display: flex;
   :hover ${VolumeBar} {
-    max-width: 100%;
+    opacity: 1;
   }
 `;
 
@@ -174,11 +177,23 @@ export const SpeedBoard = styled.div`
   padding: 20px;
   color: #fff;
   background: rgba(45, 45, 45, 0.7);
-  display: flex;
+  opacity: 0;
   align-items: center;
   border-radius: 5px;
-  bottom: 75px;
-  right: 0;
+  display: flex;
+  bottom: 140px;
+  right: -70px;
+  transition: opacity 0.5s;
+  transform: rotate(90deg);
+`;
+
+export const SpeedContainer = styled(ButtonContainer)`
+  width: 55px;
+  height: 55px;
+  position: relative;
+  :hover ${SpeedBoard} {
+    opacity: 1;
+  }
 `;
 
 export const SpeedBar = styled.input`
@@ -191,7 +206,8 @@ export const SpeedNum = styled.div`
   justify-content: center;
   margin-left: 10px;
   font-weight: bold;
-  width: 50px;
+  width: 30px;
+  transform: rotate(-90deg);
 `;
 
 export const EpisodeIcon = styled(FaClone)`
