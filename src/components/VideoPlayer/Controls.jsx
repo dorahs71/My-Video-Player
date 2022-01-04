@@ -4,6 +4,7 @@ import LeftButtons from './LeftButtons';
 import RightButtons from './RightButtons';
 
 export default function Controls({
+  id,
   videoRef,
   barWidth,
   setBarWidth,
@@ -31,7 +32,11 @@ export default function Controls({
         videoRef={videoRef}
       />
       <TrailerName>{trailerName}</TrailerName>
-      <RightButtons videoRef={videoRef} videoContainerRef={videoContainerRef} />
+      <RightButtons
+        id={id}
+        videoRef={videoRef}
+        videoContainerRef={videoContainerRef}
+      />
     </ControlContainer>
   );
 }

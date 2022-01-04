@@ -116,6 +116,7 @@ export const ButtonDiv = styled.div`
 
 export const TrailerName = styled.div`
   padding: 10px;
+  margin-left: -70px;
 `;
 
 export const Play = styled(FaPlay)`
@@ -127,7 +128,7 @@ export const Pause = styled(FaPause)`
 `;
 
 export const VolumeBar = styled.input`
-  width: 100%;
+  width: 100％;
   opacity: 0;
   margin-bottom: 7px;
   margin-left: 10px;
@@ -179,6 +180,7 @@ export const SpeedBoard = styled.div`
   background: rgba(45, 45, 45, 0.7);
   opacity: 0;
   align-items: center;
+  justify-content: center;
   border-radius: 5px;
   display: flex;
   bottom: 140px;
@@ -220,4 +222,21 @@ export const NextIcon = styled(FaStepForward)`
 
 export const BookmarkIcon = styled(BsBookmarkStarFill)`
   transform: scale(1.5);
+`;
+
+export const NextTag = styled(SpeedBoard)`
+  transform: rotate(0);
+  padding: 10px;
+  bottom: 65px;
+  width: 80px;
+  right: -10px;
+`;
+
+export const NextEpisodeContainer = styled(ButtonContainer)`
+  width: 55px;
+  height: 55px;
+  position: relative;
+  :hover ${NextTag} {
+    opacity: 1;
+  }
 `;

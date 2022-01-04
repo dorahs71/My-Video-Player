@@ -30,7 +30,7 @@ export default function Homepage() {
     <HomepageWrapper>
       <HomepageMainDiv>
         <Title>駭 客 任 務</Title>
-        <Subtitle>預告片回顧</Subtitle>
+        <Subtitle>經典回顧</Subtitle>
         <CardWrapper>
           {trailerData.map((data) => (
             <TrailerCard key={data.id} data={data} />

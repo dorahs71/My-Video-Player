@@ -12,8 +12,10 @@ export default function Volume({ videoRef }) {
   const toggleMute = () => {
     if (value <= 0) {
       setValue(0.5);
+      videoRef.current.volume = 0.5;
     } else {
       setValue(0);
+      videoRef.current.volume = 0;
     }
   };
 

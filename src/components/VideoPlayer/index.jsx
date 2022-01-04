@@ -24,12 +24,16 @@ export default function VideoPlayer() {
     let isMounted = true;
     getVideoSource(id).then((doc) => {
       const data = doc.data();
-      if (isMounted) setVideoSrc(data);
+      if (isMounted) {
+        setDurationMinutes('0');
+        setDurationSeconds('0');
+        setVideoSrc(data);
+      }
     });
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [id]);
 
   const togglePlay = () => {
     if (isPlay) {
@@ -46,7 +50,9 @@ export default function VideoPlayer() {
       let nowMoment = Math.floor(
         (videoRef.current.currentTime / videoRef.current.duration) * 1000
       );
-      setBarWidth(nowMoment);
+      if (!isNaN(nowMoment)) {
+        setBarWidth(nowMoment);
+      }
     }
   };
 
@@ -58,8 +64,11 @@ export default function VideoPlayer() {
       let seconds = Math.floor(
         videoRef.current.duration - videoRef.current.currentTime - minutes * 60
       );
-      setDurationMinutes(minutes);
-      setDurationSeconds(seconds);
+
+      if (!isNaN(minutes) && !isNaN(seconds)) {
+        setDurationMinutes(minutes);
+        setDurationSeconds(seconds);
+      }
     }
   };
 
@@ -87,15 +96,16 @@ export default function VideoPlayer() {
         autoPlay
       />
       <Controls
+        id={id}
         videoRef={videoRef}
         barWidth={barWidth}
         setBarWidth={setBarWidth}
         togglePlay={togglePlay}
         isPlay={isPlay}
-        durationMinutes={durationMinutes}
-        durationSeconds={durationSeconds}
         videoContainerRef={videoContainerRef}
         trailerName={videoSrc.chTitle}
+        durationMinutes={durationMinutes}
+        durationSeconds={durationSeconds}
       />
     </VideoContainer>
   );
