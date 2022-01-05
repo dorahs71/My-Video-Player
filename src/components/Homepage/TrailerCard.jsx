@@ -11,14 +11,14 @@ import {
   ReleaseYear,
 } from './style';
 
-export default function TrailerCard({ data }) {
+export default function TrailerCard({ trailer }) {
   return (
     <CardSquare>
-      <CardLink to={`/trailer/${data.id}`} key={data.id}>
+      <CardLink to={`/trailer/${trailer.id}`} key={trailer.id}>
         <CardContainer>
           <VideoBox>
             <Video
-              src={data.trailer}
+              src={trailer.trailer}
               type="video/mp4"
               autoPlay
               muted
@@ -26,15 +26,15 @@ export default function TrailerCard({ data }) {
               preload="metadata"
             />
 
-            <Poster src={data.poster} alt="matrix trailer" />
+            <Poster src={trailer.poster} alt="matrix trailer" />
           </VideoBox>
           <ContentDiv>
             <ChTitle>
-              {data.chTitle}
-              <ReleaseYear> ({data.year})</ReleaseYear>
+              {trailer.chTitle}
+              <ReleaseYear> ({trailer.year})</ReleaseYear>
             </ChTitle>
 
-            <EnTitle>{data.enTitle}</EnTitle>
+            <EnTitle>{trailer.enTitle}</EnTitle>
           </ContentDiv>
         </CardContainer>
       </CardLink>

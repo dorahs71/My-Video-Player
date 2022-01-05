@@ -1,7 +1,7 @@
 import { NextEpisodeContainer, ButtonDiv, NextIcon, NextTag } from './style';
 import { useNavigate } from 'react-router-dom';
 
-export default function NextEpisode({ id }) {
+export default function NextEpisode({ id, setShowBar }) {
   const navigate = useNavigate();
 
   const handleGoNext = () => {
@@ -11,7 +11,11 @@ export default function NextEpisode({ id }) {
 
   return (
     id !== 'matrix4' && (
-      <NextEpisodeContainer onClick={handleGoNext}>
+      <NextEpisodeContainer
+        onClick={handleGoNext}
+        onMouseEnter={() => setShowBar('hidden')}
+        onMouseLeave={() => setShowBar('visible')}
+      >
         <ButtonDiv>
           <NextIcon />
         </ButtonDiv>

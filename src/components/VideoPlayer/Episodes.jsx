@@ -1,11 +1,48 @@
-import { ButtonContainer, ButtonDiv, EpisodeIcon } from './style';
+import {
+  EpisodesContainer,
+  ButtonDiv,
+  EpisodeIcon,
+  EpisodesBoard,
+  EpisodeLink,
+  EpisodeBlock,
+  EpisodeImage,
+  PlayEpisode,
+  PlayIcon,
+  EpisodeContent,
+  EpisodeName,
+  EpisodeIntro,
+} from './style';
+import useTrailerData from '../../hooks/useTrailerData';
+import { useState } from 'react';
 
-export default function Episodes() {
+export default function Episodes({ setShowBar }) {
+  const trailerData = useTrailerData();
+
   return (
-    <ButtonContainer>
+    <EpisodesContainer
+      onMouseEnter={() => setShowBar('hidden')}
+      onMouseLeave={() => setShowBar('visible')}
+    >
       <ButtonDiv>
         <EpisodeIcon />
       </ButtonDiv>
-    </ButtonContainer>
+      <EpisodesBoard>
+        {trailerData.map((trailer) => (
+          <EpisodeBlock key={trailer.id}>
+            <EpisodeLink to={`/trailer/${trailer.id}`}>
+              <EpisodeImage poster={trailer.poster}>
+                <PlayEpisode>
+                  <PlayIcon />
+                </PlayEpisode>
+              </EpisodeImage>
+            </EpisodeLink>
+            <EpisodeContent>
+              <EpisodeName>{trailer.chTitle}</EpisodeName>
+              <EpisodeIntro>{trailer.intro}</EpisodeIntro>
+            </EpisodeContent>
+          </EpisodeBlock>
+        ))}
+      </EpisodesBoard>
+    </EpisodesContainer>
   );
 }

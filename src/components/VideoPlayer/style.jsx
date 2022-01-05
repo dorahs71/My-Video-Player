@@ -1,18 +1,27 @@
 import styled from 'styled-components';
-import { FaPlay, FaPause, FaClone, FaStepForward } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import {
+  FaPlay,
+  FaPause,
+  FaClone,
+  FaStepForward,
+  FaPlayCircle,
+} from 'react-icons/fa';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 import { MdOutlineForward10, MdReplay10, MdSpeed } from 'react-icons/md';
 import { RiFullscreenFill, RiFullscreenExitFill } from 'react-icons/ri';
 import { BsBookmarkStarFill } from 'react-icons/bs';
 
 export const VideoContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   position: relative;
 `;
 
 export const Video = styled.video`
   width: 100%;
+
   ::-webkit-media-controls {
     display: none !important;
   }
@@ -24,6 +33,7 @@ export const ControlContainer = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
+  align-items: center;
   flex-wrap: wrap;
   background: transparent;
   color: #fff;
@@ -36,6 +46,7 @@ export const ButtonArea = styled.div`
 
 export const ProgressDiv = styled.div`
   display: flex;
+  visibility: ${(props) => props.showBar};
   width: 100%;
   height: 12px;
   align-items: center;
@@ -106,12 +117,15 @@ export const ButtonDiv = styled.div`
   border-radius: 15px;
   cursor: pointer;
   display: flex;
+  transform: translate(20%, 20%);
   justify-content: center;
   align-items: center;
-  :hover {
-    transform: scale(1.3);
-  }
+  transform-origin: top left;
   transition: all 0.3s;
+
+  :hover {
+    transform: scale(1.2) translate(10%, 10%);
+  }
 `;
 
 export const TrailerName = styled.div`
@@ -128,18 +142,22 @@ export const Pause = styled(FaPause)`
 `;
 
 export const VolumeBar = styled.input`
-  width: 100％;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
   opacity: 0;
-  margin-bottom: 7px;
-  margin-left: 10px;
-  overflow: hidden;
+  margin-left: 15px;
+  margin-top: 20px;
   cursor: pointer;
   transition: opacity 0.5s;
 `;
 
 export const VolumeContainer = styled.div`
   display: flex;
+  margin-left: 5px;
+  align-items: center;
   :hover ${VolumeBar} {
+    visibility: visible;
     opacity: 1;
   }
 `;
@@ -175,16 +193,17 @@ export const SpeedIcon = styled(MdSpeed)`
 export const SpeedBoard = styled.div`
   position: absolute;
   z-index: 3;
-  padding: 20px;
+  padding: 25px;
   color: #fff;
-  background: rgba(45, 45, 45, 0.7);
-  opacity: 0;
+  background: rgba(45, 45, 45, 0.8);
   align-items: center;
   justify-content: center;
   border-radius: 5px;
   display: flex;
-  bottom: 140px;
-  right: -70px;
+  opacity: 0;
+  visibility: hidden;
+  bottom: 130px;
+  right: -95px;
   transition: opacity 0.5s;
   transform: rotate(90deg);
 `;
@@ -194,6 +213,7 @@ export const SpeedContainer = styled(ButtonContainer)`
   height: 55px;
   position: relative;
   :hover ${SpeedBoard} {
+    visibility: visible;
     opacity: 1;
   }
 `;
@@ -201,14 +221,14 @@ export const SpeedContainer = styled(ButtonContainer)`
 export const SpeedBar = styled.input`
   display: block;
   cursor: pointer;
+  transform: rotate(180deg);
 `;
 
 export const SpeedNum = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 10px;
   font-weight: bold;
-  width: 30px;
+  width: 50px;
   transform: rotate(-90deg);
 `;
 
@@ -227,9 +247,9 @@ export const BookmarkIcon = styled(BsBookmarkStarFill)`
 export const NextTag = styled(SpeedBoard)`
   transform: rotate(0);
   padding: 10px;
-  bottom: 65px;
+  bottom: 50px;
   width: 80px;
-  right: -10px;
+  right: -20px;
 `;
 
 export const NextEpisodeContainer = styled(ButtonContainer)`
@@ -238,5 +258,83 @@ export const NextEpisodeContainer = styled(ButtonContainer)`
   position: relative;
   :hover ${NextTag} {
     opacity: 1;
+    visibility: visible;
   }
+`;
+
+export const EpisodesBoard = styled(SpeedBoard)`
+  transform: rotate(0);
+  padding: 5px;
+  overflow: scroll;
+  flex-wrap: wrap;
+  max-height: 350px;
+  bottom: 50px;
+  right: -95px;
+`;
+
+export const EpisodesContainer = styled(ButtonContainer)`
+  width: 55px;
+  height: 55px;
+  position: relative;
+  :hover ${EpisodesBoard} {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+export const EpisodeLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+`;
+
+export const EpisodeIntro = styled.div`
+  display: none;
+`;
+
+export const EpisodeBlock = styled.div`
+  width: 525px;
+  height: 130px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  :hover ${EpisodeIntro} {
+    display: block;
+  }
+`;
+
+export const PlayEpisode = styled.div`
+  visibility: hidden;
+  transform: translate(20%, 20%);
+  opacity: 0;
+  transition: all 0.5s;
+`;
+
+export const EpisodeImage = styled.div`
+  position: relative;
+  width: 180px;
+  height: 120px;
+  background: url(${(props) => props.poster}) center no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  :hover ${PlayEpisode} {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
+export const PlayIcon = styled(FaPlayCircle)`
+  transform: scale(3);
+`;
+
+export const EpisodeContent = styled.div`
+  width: 300px;
+`;
+
+export const EpisodeName = styled.div`
+  font-weight: bold;
+  font-size: 18px;
 `;

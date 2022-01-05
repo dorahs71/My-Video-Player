@@ -6,25 +6,11 @@ import {
   Subtitle,
   CardWrapper,
 } from './style';
-import { useEffect, useState } from 'react';
-import { getTrailerCardData } from '../../utils/firebase';
+import useTrailerData from '../../hooks/useTrailerData';
 import TrailerCard from './TrailerCard';
 
 export default function Homepage() {
-  const [trailerData, setTrailerData] = useState([]);
-
-  useEffect(() => {
-    let isMounted = true;
-    getTrailerCardData().then((collection) => {
-      const data = collection.docs.map((doc) => {
-        return doc.data();
-      });
-      if (isMounted) setTrailerData(data);
-    });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const trailerData = useTrailerData();
 
   return (
     <HomepageWrapper>
@@ -32,8 +18,8 @@ export default function Homepage() {
         <Title>駭 客 任 務</Title>
         <Subtitle>經典回顧</Subtitle>
         <CardWrapper>
-          {trailerData.map((data) => (
-            <TrailerCard key={data.id} data={data} />
+          {trailerData.map((trailer) => (
+            <TrailerCard key={trailer.id} trailer={trailer} />
           ))}
         </CardWrapper>
       </HomepageMainDiv>

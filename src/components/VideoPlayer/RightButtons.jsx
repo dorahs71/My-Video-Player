@@ -5,13 +5,18 @@ import Episodes from './Episodes';
 import Bookmark from './Bookmark';
 import NextEpisode from './NextEpisode';
 
-export default function RightButtons({ id, videoRef, videoContainerRef }) {
+export default function RightButtons({
+  id,
+  videoRef,
+  videoContainerRef,
+  setShowBar,
+}) {
   return (
     <ButtonArea>
-      <NextEpisode id={id} />
+      <NextEpisode id={id} setShowBar={setShowBar} />
       <Bookmark />
-      <Episodes />
-      <Speed videoRef={videoRef} />
+      <Episodes setShowBar={setShowBar} />
+      <Speed videoRef={videoRef} setShowBar={setShowBar} />
       <FullScreen videoContainerRef={videoContainerRef} />
     </ButtonArea>
   );

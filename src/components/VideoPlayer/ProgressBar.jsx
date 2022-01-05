@@ -13,6 +13,7 @@ export default function ProgressBar({
   videoRef,
   durationMinutes,
   durationSeconds,
+  showBar,
 }) {
   const barRef = useRef();
 
@@ -23,7 +24,7 @@ export default function ProgressBar({
   };
 
   return (
-    <ProgressDiv>
+    <ProgressDiv showBar={showBar}>
       <BarContainer>
         <BarInput
           ref={barRef}

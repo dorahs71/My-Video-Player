@@ -25,8 +25,6 @@ export default function VideoPlayer() {
     getVideoSource(id).then((doc) => {
       const data = doc.data();
       if (isMounted) {
-        setDurationMinutes('0');
-        setDurationSeconds('0');
         setVideoSrc(data);
       }
     });
