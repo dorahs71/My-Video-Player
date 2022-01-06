@@ -1,27 +1,13 @@
 import { VolumeContainer, ButtonDiv, UnMute, Mute, VolumeBar } from './style';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { handleVolumeValue, toggleMute } from '../../utils/function';
 
-export default function Volume({ videoRef }) {
+export default React.memo(function Volume({ videoRef }) {
   const [value, setValue] = useState(0.5);
-
-  const handleVolumeValue = (e) => {
-    setValue(e.target.value);
-    videoRef.current.volume = value;
-  };
-
-  const toggleMute = () => {
-    if (value <= 0) {
-      setValue(0.5);
-      videoRef.current.volume = 0.5;
-    } else {
-      setValue(0);
-      videoRef.current.volume = 0;
-    }
-  };
 
   return (
     <VolumeContainer>
-      <ButtonDiv onClick={toggleMute}>
+      <ButtonDiv onClick={() => toggleMute(value, setValue, videoRef)}>
         {value <= 0 ? <Mute /> : <UnMute />}
       </ButtonDiv>
       <VolumeBar
@@ -30,8 +16,8 @@ export default function Volume({ videoRef }) {
         max="1"
         step="0.01"
         value={value}
-        onChange={(e) => handleVolumeValue(e)}
+        onChange={(e) => handleVolumeValue(e, setValue, videoRef, value)}
       />
     </VolumeContainer>
   );
-}
+});

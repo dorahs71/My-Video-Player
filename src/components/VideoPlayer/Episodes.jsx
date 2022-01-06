@@ -13,7 +13,6 @@ import {
   EpisodeIntro,
 } from './style';
 import useTrailerData from '../../hooks/useTrailerData';
-import { useState } from 'react';
 
 export default function Episodes({ setShowBar }) {
   const trailerData = useTrailerData();

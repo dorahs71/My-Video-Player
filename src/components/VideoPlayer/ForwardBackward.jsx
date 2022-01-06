@@ -1,26 +1,16 @@
 import { ButtonContainer, ButtonDiv, Forward, Backward } from './style';
+import React from 'react';
+import { handleForBackward } from '../../utils/function';
 
-export default function ForwardBackward({ setBarWidth, videoRef }) {
-  const handleBackward = () => {
-    const video = videoRef.current;
-    setBarWidth((prev) => prev - (10 / video.duration) * 1000);
-    video.currentTime = video.currentTime - 10;
-  };
-
-  const handleForward = () => {
-    const video = videoRef.current;
-    setBarWidth((prev) => prev + (10 / video.duration) * 1000);
-    video.currentTime = video.currentTime + 10;
-  };
-
+export default React.memo(function ForwardBackward({ setBarWidth, videoRef }) {
   return (
     <ButtonContainer>
-      <ButtonDiv onClick={handleBackward}>
+      <ButtonDiv onClick={() => handleForBackward(videoRef, setBarWidth, -10)}>
         <Backward />
       </ButtonDiv>
-      <ButtonDiv onClick={handleForward}>
+      <ButtonDiv onClick={() => handleForBackward(videoRef, setBarWidth, 10)}>
         <Forward />
       </ButtonDiv>
     </ButtonContainer>
   );
-}
+});

@@ -7,14 +7,10 @@ import {
   SpeedNum,
 } from './style';
 import { useState } from 'react';
+import { handleSpeedValue } from '../../utils/function';
 
 export default function Speed({ videoRef, setShowBar }) {
   const [value, setValue] = useState(1);
-
-  const handleSpeedValue = (e) => {
-    setValue(e.target.value);
-    videoRef.current.playbackRate = value;
-  };
 
   return (
     <SpeedContainer
@@ -32,7 +28,7 @@ export default function Speed({ videoRef, setShowBar }) {
           max="2"
           step="0.1"
           value={value}
-          onChange={(e) => handleSpeedValue(e)}
+          onChange={(e) => handleSpeedValue(e, setValue, videoRef, value)}
         />
       </SpeedBoard>
     </SpeedContainer>

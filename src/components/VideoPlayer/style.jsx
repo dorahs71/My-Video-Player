@@ -19,13 +19,15 @@ import { BsBookmarkStarFill } from 'react-icons/bs';
 export const VideoContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   position: relative;
 `;
 
 export const Video = styled.video`
   width: 100%;
-
   ::-webkit-media-controls {
     display: none !important;
   }

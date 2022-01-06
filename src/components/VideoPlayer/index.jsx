@@ -7,6 +7,9 @@ import {
   togglePlay,
   playByRecord,
   handleWatchRecord,
+  handleBarWidth,
+  handleShowDuration,
+  handleVideoEndChangeToPlay,
 } from '../../utils/function';
 
 export default function VideoPlayer() {
@@ -40,58 +43,10 @@ export default function VideoPlayer() {
     };
   }, [id]);
 
-  const handleBarWidth = () => {
-    if (videoRef.current !== null) {
-      let nowMoment = Math.floor(
-        (videoRef.current.currentTime / videoRef.current.duration) * 1000
-      );
-      if (!isNaN(nowMoment)) {
-        setBarWidth(nowMoment);
-      }
-    }
-  };
-
-  const handleShowDuration = () => {
-    if (videoRef.current !== null) {
-      let minutes = Math.floor(
-        (videoRef.current.duration - videoRef.current.currentTime) / 60
-      );
-      let seconds = Math.floor(
-        videoRef.current.duration - videoRef.current.currentTime - minutes * 60
-      );
-
-      if (!isNaN(minutes) && !isNaN(seconds)) {
-        setDurationMinutes(minutes);
-        setDurationSeconds(seconds);
-      }
-    }
-  };
-
-  // const handleWatchRecord = () => {
-  //   if (videoRef.current !== null) {
-  //     setCurrentTime(videoRef.current.currentTime);
-  //     const watchRecord = JSON.parse(localStorage.getItem('duration')) || [];
-  //     let newRecord = { id: id, duration: currentTime };
-  //     const index = watchRecord.findIndex((obj) => obj.id === newRecord.id);
-  //     if (index === -1) {
-  //       watchRecord.push(newRecord);
-  //     } else {
-  //       watchRecord[index].duration = newRecord.duration;
-  //     }
-  //     localStorage.setItem('duration', JSON.stringify(watchRecord));
-  //   }
-  // };
-
-  const handleVideoEndChangeToPlay = () => {
-    if (videoRef.current.ended) {
-      setIsPlay(true);
-    }
-  };
-
   const handleTimeUpdate = () => {
-    handleBarWidth();
-    handleShowDuration();
-    handleVideoEndChangeToPlay();
+    handleBarWidth(videoRef, setBarWidth);
+    handleShowDuration(videoRef, setDurationMinutes, setDurationSeconds);
+    handleVideoEndChangeToPlay(videoRef, setIsPlay);
     handleWatchRecord(videoRef, id, currentTime, setCurrentTime);
   };
 

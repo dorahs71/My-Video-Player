@@ -1,7 +1,7 @@
 import { ButtonContainer, ButtonDiv, Pause, Play } from './style';
+import React from 'react';
 import { togglePlay } from '../../utils/function';
 
-import React from 'react';
 export default React.memo(function PlayPause({ isPlay, setIsPlay, videoRef }) {
   return (
     <ButtonContainer>

@@ -6,6 +6,7 @@ import {
   VideoDuration,
 } from './style';
 import { useRef } from 'react';
+import { handleSlideBar } from '../../utils/function';
 
 export default function ProgressBar({
   barWidth,
@@ -17,12 +18,6 @@ export default function ProgressBar({
 }) {
   const barRef = useRef();
 
-  const handleSlideBar = (e) => {
-    setBarWidth(e.target.value);
-    videoRef.current.currentTime =
-      videoRef.current.duration * (e.target.value / 1000);
-  };
-
   return (
     <ProgressDiv showBar={showBar}>
       <BarContainer>
@@ -33,7 +28,7 @@ export default function ProgressBar({
           min="0"
           max="1000"
           step="0.01"
-          onChange={(e) => handleSlideBar(e)}
+          onChange={(e) => handleSlideBar(e, setBarWidth, videoRef)}
         />
         <WatchedBar barWidth={barWidth} />
       </BarContainer>

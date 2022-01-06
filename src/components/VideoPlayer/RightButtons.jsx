@@ -1,11 +1,12 @@
 import { RightButtonArea } from './style';
+import React from 'react';
 import FullScreen from './FullScreen';
 import Speed from './Speed';
 import Episodes from './Episodes';
 import Bookmark from './Bookmark';
 import NextEpisode from './NextEpisode';
 
-export default function RightButtons({
+export default React.memo(function RightButtons({
   id,
   videoRef,
   videoContainerRef,
@@ -20,4 +21,4 @@ export default function RightButtons({
       <FullScreen videoContainerRef={videoContainerRef} />
     </RightButtonArea>
   );
-}
+});
