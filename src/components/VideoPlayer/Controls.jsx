@@ -9,7 +9,7 @@ export default function Controls({
   videoRef,
   barWidth,
   setBarWidth,
-  togglePlay,
+  setIsPlay,
   isPlay,
   durationMinutes,
   durationSeconds,
@@ -30,7 +30,7 @@ export default function Controls({
       />
 
       <LeftButtons
-        togglePlay={togglePlay}
+        setIsPlay={setIsPlay}
         isPlay={isPlay}
         barWidth={barWidth}
         setBarWidth={setBarWidth}

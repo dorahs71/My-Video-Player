@@ -1,8 +1,13 @@
-import { VideoContainer, Video } from './style';
+import { VideoContainer, Video, GetBack, BackArrow, BackLink } from './style';
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVideoSource } from '../../utils/firebase';
 import Controls from './Controls';
+import {
+  togglePlay,
+  playByRecord,
+  handleWatchRecord,
+} from '../../utils/function';
 
 export default function VideoPlayer() {
   const { id } = useParams();
@@ -13,9 +18,10 @@ export default function VideoPlayer() {
   const [videoSrc, setVideoSrc] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState('0');
   const [durationSeconds, setDurationSeconds] = useState('0');
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    if (videoRef !== null && !videoRef.current.paused) {
+    if (videoRef !== null && !videoRef.current.pause) {
       setIsPlay(false);
     }
   }, [isPlay]);
@@ -26,22 +32,13 @@ export default function VideoPlayer() {
       const data = doc.data();
       if (isMounted) {
         setVideoSrc(data);
+        playByRecord(id, videoRef);
       }
     });
     return () => {
       isMounted = false;
     };
   }, [id]);
-
-  const togglePlay = () => {
-    if (isPlay) {
-      videoRef.current.play();
-      setIsPlay(false);
-    } else {
-      videoRef.current.pause();
-      setIsPlay(true);
-    }
-  };
 
   const handleBarWidth = () => {
     if (videoRef.current !== null) {
@@ -70,16 +67,32 @@ export default function VideoPlayer() {
     }
   };
 
+  // const handleWatchRecord = () => {
+  //   if (videoRef.current !== null) {
+  //     setCurrentTime(videoRef.current.currentTime);
+  //     const watchRecord = JSON.parse(localStorage.getItem('duration')) || [];
+  //     let newRecord = { id: id, duration: currentTime };
+  //     const index = watchRecord.findIndex((obj) => obj.id === newRecord.id);
+  //     if (index === -1) {
+  //       watchRecord.push(newRecord);
+  //     } else {
+  //       watchRecord[index].duration = newRecord.duration;
+  //     }
+  //     localStorage.setItem('duration', JSON.stringify(watchRecord));
+  //   }
+  // };
+
   const handleVideoEndChangeToPlay = () => {
     if (videoRef.current.ended) {
       setIsPlay(true);
     }
   };
 
-  const handleVideoProgress = () => {
+  const handleTimeUpdate = () => {
     handleBarWidth();
     handleShowDuration();
     handleVideoEndChangeToPlay();
+    handleWatchRecord(videoRef, id, currentTime, setCurrentTime);
   };
 
   return (
@@ -89,17 +102,22 @@ export default function VideoPlayer() {
         type="video/mp4"
         preload="metadata"
         ref={videoRef}
-        onTimeUpdate={handleVideoProgress}
-        onClick={togglePlay}
+        onTimeUpdate={handleTimeUpdate}
+        onClick={() => togglePlay(isPlay, setIsPlay, videoRef)}
         autoPlay
       />
+      <BackLink to="/">
+        <GetBack>
+          <BackArrow />
+        </GetBack>
+      </BackLink>
       <Controls
         id={id}
         videoRef={videoRef}
         barWidth={barWidth}
         setBarWidth={setBarWidth}
-        togglePlay={togglePlay}
         isPlay={isPlay}
+        setIsPlay={setIsPlay}
         videoContainerRef={videoContainerRef}
         trailerName={videoSrc.chTitle}
         durationMinutes={durationMinutes}

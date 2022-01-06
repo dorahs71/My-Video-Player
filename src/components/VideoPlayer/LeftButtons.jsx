@@ -4,15 +4,14 @@ import ForwardBackward from './ForwardBackward';
 import Volume from './Volume';
 
 export default function LeftButtons({
-  togglePlay,
+  setIsPlay,
   isPlay,
-  barWidth,
   setBarWidth,
   videoRef,
 }) {
   return (
     <ButtonArea>
-      <PlayPause togglePlay={togglePlay} isPlay={isPlay} barWidth={barWidth} />
+      <PlayPause setIsPlay={setIsPlay} isPlay={isPlay} videoRef={videoRef} />
       <ForwardBackward setBarWidth={setBarWidth} videoRef={videoRef} />
       <Volume videoRef={videoRef} />
     </ButtonArea>

@@ -1,4 +1,4 @@
-import { ButtonArea } from './style';
+import { RightButtonArea } from './style';
 import FullScreen from './FullScreen';
 import Speed from './Speed';
 import Episodes from './Episodes';
@@ -12,12 +12,12 @@ export default function RightButtons({
   setShowBar,
 }) {
   return (
-    <ButtonArea>
+    <RightButtonArea>
       <NextEpisode id={id} setShowBar={setShowBar} />
       <Bookmark />
       <Episodes setShowBar={setShowBar} />
       <Speed videoRef={videoRef} setShowBar={setShowBar} />
       <FullScreen videoContainerRef={videoContainerRef} />
-    </ButtonArea>
+    </RightButtonArea>
   );
 }

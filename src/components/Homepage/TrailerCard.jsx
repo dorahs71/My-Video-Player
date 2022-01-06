@@ -14,7 +14,7 @@ import {
 export default function TrailerCard({ trailer }) {
   return (
     <CardSquare>
-      <CardLink to={`/trailer/${trailer.id}`} key={trailer.id}>
+      <CardLink to={`/trailer/${trailer.id}`}>
         <CardContainer>
           <VideoBox>
             <Video

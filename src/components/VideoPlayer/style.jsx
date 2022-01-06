@@ -9,7 +9,11 @@ import {
 } from 'react-icons/fa';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 import { MdOutlineForward10, MdReplay10, MdSpeed } from 'react-icons/md';
-import { RiFullscreenFill, RiFullscreenExitFill } from 'react-icons/ri';
+import {
+  RiFullscreenFill,
+  RiFullscreenExitFill,
+  RiArrowGoBackFill,
+} from 'react-icons/ri';
 import { BsBookmarkStarFill } from 'react-icons/bs';
 
 export const VideoContainer = styled.div`
@@ -42,6 +46,10 @@ export const ControlContainer = styled.div`
 
 export const ButtonArea = styled.div`
   display: flex;
+`;
+
+export const RightButtonArea = styled(ButtonArea)`
+  margin-right: 10px;
 `;
 
 export const ProgressDiv = styled.div`
@@ -103,7 +111,7 @@ export const WatchedBar = styled.div`
 
 export const VideoDuration = styled.div`
   color: white;
-  padding: 10px;
+  padding: 5px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -122,7 +130,6 @@ export const ButtonDiv = styled.div`
   align-items: center;
   transform-origin: top left;
   transition: all 0.3s;
-
   :hover {
     transform: scale(1.2) translate(10%, 10%);
   }
@@ -130,7 +137,7 @@ export const ButtonDiv = styled.div`
 
 export const TrailerName = styled.div`
   padding: 10px;
-  margin-left: -70px;
+  margin-left: -85px;
 `;
 
 export const Play = styled(FaPlay)`
@@ -337,4 +344,25 @@ export const EpisodeContent = styled.div`
 export const EpisodeName = styled.div`
   font-weight: bold;
   font-size: 18px;
+`;
+
+export const BackLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+`;
+
+export const GetBack = styled.div`
+  position: absolute;
+  left: 40px;
+  top: 50px;
+  cursor: pointer;
+  color: #fff;
+  transition: all.5s;
+  :hover {
+    transform: scale(1.2);
+  }
+`;
+
+export const BackArrow = styled(RiArrowGoBackFill)`
+  transform: scale(2.3);
 `;
