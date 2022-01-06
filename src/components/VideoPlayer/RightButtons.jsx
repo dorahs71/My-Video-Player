@@ -11,13 +11,27 @@ export default React.memo(function RightButtons({
   videoRef,
   videoContainerRef,
   setShowBar,
+  updateBookmark,
+  setUpdateBookmark,
+  setRemoveBookmarkAlert,
+  removeData,
+  setRemoveData,
 }) {
   return (
     <RightButtonArea>
       <NextEpisode id={id} setShowBar={setShowBar} />
-      <Bookmark />
-      <Episodes setShowBar={setShowBar} />
+      <Bookmark
+        id={id}
+        setShowBar={setShowBar}
+        videoRef={videoRef}
+        updateBookmark={updateBookmark}
+        setUpdateBookmark={setUpdateBookmark}
+        setRemoveBookmarkAlert={setRemoveBookmarkAlert}
+        removeData={removeData}
+        setRemoveData={setRemoveData}
+      />
       <Speed videoRef={videoRef} setShowBar={setShowBar} />
+      <Episodes setShowBar={setShowBar} />
       <FullScreen videoContainerRef={videoContainerRef} />
     </RightButtonArea>
   );

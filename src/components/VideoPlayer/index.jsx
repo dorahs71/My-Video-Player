@@ -1,8 +1,18 @@
-import { VideoContainer, Video, GetBack, BackArrow, BackLink } from './style';
+import {
+  VideoContainer,
+  Video,
+  GetBack,
+  BackArrow,
+  BackLink,
+  AddBookmark,
+  AddBookmarkIcon,
+  TrailerName,
+} from './style';
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVideoSource } from '../../utils/firebase';
 import Controls from './Controls';
+import { SuccessWindow, ConfirmWindow } from './AlertWindow';
 import {
   togglePlay,
   playByRecord,
@@ -22,6 +32,10 @@ export default function VideoPlayer() {
   const [durationMinutes, setDurationMinutes] = useState('0');
   const [durationSeconds, setDurationSeconds] = useState('0');
   const [currentTime, setCurrentTime] = useState(0);
+  const [updateBookmark, setUpdateBookmark] = useState(false);
+  const [addBookmarkAlert, setAddBookmarkAlert] = useState(false);
+  const [removeBookmarkAlert, setRemoveBookmarkAlert] = useState(false);
+  const [removeData, setRemoveData] = useState('');
 
   useEffect(() => {
     if (videoRef !== null && !videoRef.current.pause) {
@@ -50,6 +64,11 @@ export default function VideoPlayer() {
     handleWatchRecord(videoRef, id, currentTime, setCurrentTime);
   };
 
+  const showAddBookmarkAlert = () => {
+    setAddBookmarkAlert(true);
+    setUpdateBookmark(true);
+  };
+
   return (
     <VideoContainer ref={videoContainerRef}>
       <Video
@@ -65,7 +84,11 @@ export default function VideoPlayer() {
         <GetBack>
           <BackArrow />
         </GetBack>
+        <TrailerName>{videoSrc.chTitle}</TrailerName>
       </BackLink>
+      <AddBookmark onClick={showAddBookmarkAlert}>
+        <AddBookmarkIcon />
+      </AddBookmark>
       <Controls
         id={id}
         videoRef={videoRef}
@@ -74,9 +97,27 @@ export default function VideoPlayer() {
         isPlay={isPlay}
         setIsPlay={setIsPlay}
         videoContainerRef={videoContainerRef}
-        trailerName={videoSrc.chTitle}
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
+        updateBookmark={updateBookmark}
+        setUpdateBookmark={setUpdateBookmark}
+        setRemoveBookmarkAlert={setRemoveBookmarkAlert}
+        removeData={removeData}
+        setRemoveData={setRemoveData}
+      />
+      <SuccessWindow
+        trigger={addBookmarkAlert}
+        setTrigger={setAddBookmarkAlert}
+        id={id}
+        videoRef={videoRef}
+        currentTime={currentTime}
+        setUpdateBookmark={setUpdateBookmark}
+      />
+      <ConfirmWindow
+        trigger={removeBookmarkAlert}
+        setTrigger={setRemoveBookmarkAlert}
+        setUpdateBookmark={setUpdateBookmark}
+        removeData={removeData}
       />
     </VideoContainer>
   );

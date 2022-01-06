@@ -1,4 +1,4 @@
-import { ControlContainer, TrailerName } from './style';
+import { ControlContainer } from './style';
 import { useState } from 'react';
 import ProgressBar from './ProgressBar';
 import LeftButtons from './LeftButtons';
@@ -14,7 +14,11 @@ export default function Controls({
   durationMinutes,
   durationSeconds,
   videoContainerRef,
-  trailerName,
+  updateBookmark,
+  setUpdateBookmark,
+  setRemoveBookmarkAlert,
+  removeData,
+  setRemoveData,
 }) {
   const [showBar, setShowBar] = useState('visible');
 
@@ -36,12 +40,16 @@ export default function Controls({
         setBarWidth={setBarWidth}
         videoRef={videoRef}
       />
-      <TrailerName>{trailerName}</TrailerName>
       <RightButtons
         id={id}
         videoRef={videoRef}
         videoContainerRef={videoContainerRef}
         setShowBar={setShowBar}
+        updateBookmark={updateBookmark}
+        setUpdateBookmark={setUpdateBookmark}
+        setRemoveBookmarkAlert={setRemoveBookmarkAlert}
+        removeData={removeData}
+        setRemoveData={setRemoveData}
       />
     </ControlContainer>
   );

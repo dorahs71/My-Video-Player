@@ -10,8 +10,10 @@ export const togglePlay = (isPlay, setIsPlay, videoRef) => {
 
 export const playByRecord = (id, videoRef) => {
   const watchRecord = JSON.parse(localStorage.getItem('duration')) || [];
-  const index = watchRecord.findIndex((obj) => obj.id === id);
-  videoRef.current.currentTime = watchRecord[index].duration;
+  if (watchRecord.length !== 0) {
+    const index = watchRecord.findIndex((obj) => obj.id === id);
+    videoRef.current.currentTime = watchRecord[index].duration;
+  }
 };
 
 export const handleWatchRecord = (
@@ -88,13 +90,17 @@ export const toggleMute = (value, setValue, videoRef) => {
 
 export const handleSpeedValue = (e, setValue, videoRef, value) => {
   setValue(e.target.value);
-  videoRef.current.playbackRate = value;
+  if (videoRef !== null) {
+    videoRef.current.playbackRate = value;
+  }
 };
 
 export const handleSlideBar = (e, setBarWidth, videoRef) => {
   setBarWidth(e.target.value);
-  videoRef.current.currentTime =
-    videoRef.current.duration * (e.target.value / 1000);
+  if (videoRef !== null) {
+    videoRef.current.currentTime =
+      videoRef.current.duration * (e.target.value / 1000);
+  }
 };
 
 export const handleForBackward = (videoRef, setBarWidth, seconds) => {
@@ -116,4 +122,53 @@ export const toggleFullScreen = (isFull, setIsFull, videoContainerRef) => {
     setIsFull(true);
     videoContainerRef.current.requestFullscreen();
   }
+};
+
+export const getBookmarkData = (id, setShowBookmark) => {
+  const bookmarkData = JSON.parse(localStorage.getItem('bookmark')) || [];
+  const episodeBookmark = [];
+  bookmarkData.forEach((obj) => {
+    if (obj.id === id) {
+      episodeBookmark.push(obj);
+    }
+  });
+  setShowBookmark(episodeBookmark);
+};
+
+export const confirmAddBookmark = (
+  videoRef,
+  id,
+  currentTime,
+  setUpdateBookmark,
+  setTrigger
+) => {
+  if (videoRef.current !== null) {
+    const bookmark = JSON.parse(localStorage.getItem('bookmark')) || [];
+    let newBookmark = { id: id, time: currentTime.toFixed(2) };
+    const index = bookmark.findIndex(
+      (obj) => obj.id === newBookmark.id && obj.time === newBookmark.time
+    );
+    if (index === -1) {
+      bookmark.push(newBookmark);
+    } else {
+      bookmark[index].time = newBookmark.time;
+    }
+    localStorage.setItem('bookmark', JSON.stringify(bookmark));
+    setUpdateBookmark(false);
+    setTrigger(false);
+  }
+};
+
+export const handlePlayBookmark = (videoRef, time) => {
+  if (videoRef !== null) {
+    videoRef.current.currentTime = time;
+  }
+};
+
+export const confirmRemoveBookmark = (data, setUpdateBookmark, setTrigger) => {
+  const bookmarkData = JSON.parse(localStorage.getItem('bookmark')) || [];
+  let newData = bookmarkData.filter((obj) => obj.time !== data.time);
+  localStorage.setItem('bookmark', JSON.stringify(newData));
+  setUpdateBookmark(false);
+  setTrigger(false);
 };

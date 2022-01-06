@@ -8,7 +8,13 @@ import {
   FaPlayCircle,
 } from 'react-icons/fa';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
-import { MdOutlineForward10, MdReplay10, MdSpeed } from 'react-icons/md';
+import {
+  MdOutlineForward10,
+  MdReplay10,
+  MdSpeed,
+  MdBookmarkAdd,
+  MdDelete,
+} from 'react-icons/md';
 import {
   RiFullscreenFill,
   RiFullscreenExitFill,
@@ -51,11 +57,12 @@ export const ButtonArea = styled.div`
 `;
 
 export const RightButtonArea = styled(ButtonArea)`
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 
 export const ProgressDiv = styled.div`
   display: flex;
+  margin-bottom: 6px;
   visibility: ${(props) => props.showBar};
   width: 100%;
   height: 12px;
@@ -138,8 +145,12 @@ export const ButtonDiv = styled.div`
 `;
 
 export const TrailerName = styled.div`
-  padding: 10px;
-  margin-left: -85px;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 38px;
+  left: 100px;
+  color: #fff;
 `;
 
 export const Play = styled(FaPlay)`
@@ -155,10 +166,10 @@ export const VolumeBar = styled.input`
   height: 100%;
   visibility: hidden;
   opacity: 0;
-  margin-left: 15px;
   margin-top: 20px;
   cursor: pointer;
   transition: opacity 0.5s;
+  transform: scale(0.8);
 `;
 
 export const VolumeContainer = styled.div`
@@ -168,6 +179,9 @@ export const VolumeContainer = styled.div`
   :hover ${VolumeBar} {
     visibility: visible;
     opacity: 1;
+  }
+  @media (max-width: 769px) {
+    display: none;
   }
 `;
 
@@ -202,13 +216,13 @@ export const SpeedIcon = styled(MdSpeed)`
 export const SpeedBoard = styled.div`
   position: absolute;
   z-index: 3;
-  padding: 25px;
+  padding: 20px;
   color: #fff;
   background: rgba(45, 45, 45, 0.8);
+  display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  display: flex;
   opacity: 0;
   visibility: hidden;
   bottom: 130px;
@@ -289,6 +303,9 @@ export const EpisodesContainer = styled(ButtonContainer)`
     visibility: visible;
     opacity: 1;
   }
+  @media (max-width: 769px) {
+    display: none;
+  }
 `;
 
 export const EpisodeLink = styled(Link)`
@@ -367,4 +384,163 @@ export const GetBack = styled.div`
 
 export const BackArrow = styled(RiArrowGoBackFill)`
   transform: scale(2.3);
+`;
+
+export const AddBookmark = styled(GetBack)`
+  left: auto;
+  right: 35px;
+`;
+
+export const AddBookmarkIcon = styled(MdBookmarkAdd)`
+  transform: scale(2.3);
+`;
+export const BookmarkBoard = styled.div`
+  width: 170px;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  color: #fff;
+  background: rgba(45, 45, 45, 0.8);
+  border-radius: 5px;
+  display: flex;
+  overflow-x: hidden;
+  overflow: scroll;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-height: 145px;
+  bottom: 50px;
+  right: -60px;
+  transition: opacity 0.5s;
+`;
+
+export const BookmarkContainer = styled(ButtonContainer)`
+  width: 55px;
+  height: 55px;
+  position: relative;
+  :hover ${BookmarkBoard} {
+    visibility: visible;
+    opacity: 1;
+  }
+  @media (max-width: 769px) {
+    display: none;
+  }
+`;
+
+export const BookmarkBlock = styled.div`
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :hover {
+    background: #4a4a4a;
+  }
+`;
+
+export const NoBookmarkBlock = styled.div`
+  width: 100px;
+  height: 50px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PlayBookmark = styled.div`
+  width: 50px;
+  height: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all.5s;
+  :hover {
+    color: #fdd500;
+    transform: scale(1.2);
+  }
+`;
+
+export const PlayBookmarkIcon = styled(FaPlayCircle)`
+  transform: scale(1.8);
+`;
+
+export const BookmarkTime = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+export const RemoveDiv = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 15px;
+  border-radius: 50%;
+  width: 40px;
+  height: 30px;
+  transition: all 0.5s;
+  :hover {
+    background: #fff;
+    color: #6b0015;
+  }
+`;
+
+export const RemoveIcon = styled(MdDelete)`
+  transform: scale(1.5);
+`;
+
+export const AlertWindow = styled.div`
+  width: 250px;
+  height: 250px;
+  display: flex;
+  padding: 25px;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+  color: #fff;
+  margin: 0 auto;
+  background: rgba(194, 210, 198, 0.8);
+`;
+
+export const AlertImg = styled.img`
+  width: 80px;
+  height: 80px;
+`;
+
+export const AlertWord = styled.div`
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Button = styled.div`
+  margin-top: 10px;
+  width: 80px;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #949a92;
+  box-shadow: rgba(20, 20, 20, 0.3) 0px 1px 2px 0px,
+    rgba(20, 20, 20, 0.15) 0px 1px 3px 1px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: #b8bbb6;
+    color: #444;
+  }
 `;
