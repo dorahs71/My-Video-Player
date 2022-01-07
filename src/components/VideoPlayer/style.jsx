@@ -516,6 +516,7 @@ export const AlertWindow = styled.div`
   align-items: center;
   justify-content: space-around;
   position: absolute;
+  z-index: 6;
   box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
   color: #fff;
   margin: 0 auto;
