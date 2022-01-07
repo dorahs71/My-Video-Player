@@ -23,7 +23,7 @@ export function SuccessWindow({
   return (
     trigger && (
       <AlertWindow>
-        <AlertImg src={success} alt="" />
+        <AlertImg src={success} alt="dora video player" />
         <AlertWord>書籤已成功加入</AlertWord>
         <Button
           onClick={() =>
@@ -57,7 +57,7 @@ export function ConfirmWindow({
   return (
     trigger && (
       <AlertWindow>
-        <AlertImg src={ask} alt="" />
+        <AlertImg src={ask} alt="dora video player" />
         <AlertWord>確認要刪除書籤嗎？</AlertWord>
         <ButtonWrapper>
           <Button onClick={cancelRemoveBookmark}>取消</Button>

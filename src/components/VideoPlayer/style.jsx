@@ -34,15 +34,25 @@ export const VideoContainer = styled.div`
 
 export const Video = styled.video`
   width: 100%;
+  position: relative;
+  z-index: 1;
   ::-webkit-media-controls {
     display: none !important;
   }
+`;
+
+export const ControlsWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
 `;
 
 export const ControlContainer = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
+  z-index: 2;
   bottom: 0;
   width: 100%;
   align-items: center;
@@ -148,6 +158,7 @@ export const TrailerName = styled.div`
   font-size: 30px;
   font-weight: bold;
   position: absolute;
+  z-index: 2;
   top: 38px;
   left: 100px;
   color: #fff;
@@ -372,6 +383,7 @@ export const BackLink = styled(Link)`
 
 export const GetBack = styled.div`
   position: absolute;
+  z-index: 2;
   left: 40px;
   top: 50px;
   cursor: pointer;
@@ -383,7 +395,7 @@ export const GetBack = styled.div`
 `;
 
 export const BackArrow = styled(RiArrowGoBackFill)`
-  transform: scale(2.3);
+  transform: scale(2);
 `;
 
 export const AddBookmark = styled(GetBack)`
@@ -392,7 +404,7 @@ export const AddBookmark = styled(GetBack)`
 `;
 
 export const AddBookmarkIcon = styled(MdBookmarkAdd)`
-  transform: scale(2.3);
+  transform: scale(2);
 `;
 export const BookmarkBoard = styled.div`
   width: 170px;

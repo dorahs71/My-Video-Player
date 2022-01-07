@@ -23,7 +23,7 @@ export default function TrailerCard({ trailer }) {
               autoPlay
               muted
               loop
-              preload="metadata"
+              preload="auto"
             />
 
             <Poster src={trailer.poster} alt="matrix trailer" />

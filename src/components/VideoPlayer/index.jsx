@@ -1,18 +1,10 @@
-import {
-  VideoContainer,
-  Video,
-  GetBack,
-  BackArrow,
-  BackLink,
-  AddBookmark,
-  AddBookmarkIcon,
-  TrailerName,
-} from './style';
+import { VideoContainer, Video } from './style';
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVideoSource } from '../../utils/firebase';
 import Controls from './Controls';
 import { SuccessWindow, ConfirmWindow } from './AlertWindow';
+import Loading from '../Common/Loading';
 import {
   togglePlay,
   playByRecord,
@@ -20,12 +12,15 @@ import {
   handleBarWidth,
   handleShowDuration,
   handleVideoEndChangeToPlay,
+  handleShowControl,
+  countNum,
 } from '../../utils/function';
 
 export default function VideoPlayer() {
   const { id } = useParams();
   const videoRef = useRef(null);
   const videoContainerRef = useRef(null);
+  const controlsRef = useRef(null);
   const [isPlay, setIsPlay] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
   const [videoSrc, setVideoSrc] = useState(0);
@@ -36,9 +31,10 @@ export default function VideoPlayer() {
   const [addBookmarkAlert, setAddBookmarkAlert] = useState(false);
   const [removeBookmarkAlert, setRemoveBookmarkAlert] = useState(false);
   const [removeData, setRemoveData] = useState('');
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (videoRef !== null && !videoRef.current.pause) {
+    if (videoRef.current !== null && !videoRef.current.pause) {
       setIsPlay(false);
     }
   }, [isPlay]);
@@ -62,45 +58,38 @@ export default function VideoPlayer() {
     handleShowDuration(videoRef, setDurationMinutes, setDurationSeconds);
     handleVideoEndChangeToPlay(videoRef, setIsPlay);
     handleWatchRecord(videoRef, id, currentTime, setCurrentTime);
+    countNum(count, controlsRef, setCount);
   };
 
-  const showAddBookmarkAlert = () => {
-    setAddBookmarkAlert(true);
-    setUpdateBookmark(true);
-  };
-
-  return (
-    <VideoContainer ref={videoContainerRef}>
+  return videoSrc ? (
+    <VideoContainer
+      ref={videoContainerRef}
+      onMouseMove={() => handleShowControl(controlsRef, setCount)}
+    >
       <Video
         src={videoSrc.trailer}
         type="video/mp4"
-        preload="metadata"
+        preload="auto"
         ref={videoRef}
         onTimeUpdate={handleTimeUpdate}
         onClick={() => togglePlay(isPlay, setIsPlay, videoRef)}
         autoPlay
       />
-      <BackLink to="/">
-        <GetBack>
-          <BackArrow />
-        </GetBack>
-        <TrailerName>{videoSrc.chTitle}</TrailerName>
-      </BackLink>
-      <AddBookmark onClick={showAddBookmarkAlert}>
-        <AddBookmarkIcon />
-      </AddBookmark>
       <Controls
         id={id}
         videoRef={videoRef}
+        ref={controlsRef}
         barWidth={barWidth}
         setBarWidth={setBarWidth}
         isPlay={isPlay}
         setIsPlay={setIsPlay}
+        trailerName={videoSrc.chTitle}
         videoContainerRef={videoContainerRef}
         durationMinutes={durationMinutes}
         durationSeconds={durationSeconds}
         updateBookmark={updateBookmark}
         setUpdateBookmark={setUpdateBookmark}
+        setAddBookmarkAlert={setAddBookmarkAlert}
         setRemoveBookmarkAlert={setRemoveBookmarkAlert}
         removeData={removeData}
         setRemoveData={setRemoveData}
@@ -120,5 +109,7 @@ export default function VideoPlayer() {
         removeData={removeData}
       />
     </VideoContainer>
+  ) : (
+    <Loading />
   );
 }

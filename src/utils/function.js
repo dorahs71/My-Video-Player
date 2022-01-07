@@ -10,7 +10,7 @@ export const togglePlay = (isPlay, setIsPlay, videoRef) => {
 
 export const playByRecord = (id, videoRef) => {
   const watchRecord = JSON.parse(localStorage.getItem('duration')) || [];
-  if (watchRecord.length !== 0) {
+  if (videoRef.current !== null && watchRecord.length !== 0) {
     const index = watchRecord.findIndex((obj) => obj.id === id);
     videoRef.current.currentTime = watchRecord[index].duration;
   }
@@ -171,4 +171,20 @@ export const confirmRemoveBookmark = (data, setUpdateBookmark, setTrigger) => {
   localStorage.setItem('bookmark', JSON.stringify(newData));
   setUpdateBookmark(false);
   setTrigger(false);
+};
+
+export const handleShowControl = (controlsRef, setCount) => {
+  controlsRef.current.style.display = 'block';
+  setCount(0);
+};
+
+export const countNum = (count, controlsRef, setCount) => {
+  if (count > 8) {
+    controlsRef.current.style.display = 'none';
+    setCount(0);
+  }
+  if (controlsRef.current.style.display === 'block') {
+    let newCount = count + 1;
+    setCount(newCount);
+  }
 };
