@@ -10,7 +10,7 @@ Demo Link : [Dora Video Player >>](https://dora-video-player.web.app)
 <img align='center' src= "./src/images/player.png" width=100%/>
 
 
-Functions
+## Functions
 - Get back to homepage arrow
 - Add bookmark
 - Play / Pause
